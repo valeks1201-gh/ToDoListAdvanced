@@ -1,0 +1,10 @@
+﻿{
+  "ORG1": {
+    "ExternalApiUrl": "https://org1.api:123/",
+    "MethodTypes": [ "Method1", "Method2" ]
+  },
+  "ORG2": {
+    "ExternalApiUrl": "https://org2.api:123/",
+    "MethodTypes": [ "Method2" ]
+  }
+}

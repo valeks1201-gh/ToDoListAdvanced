@@ -1,0 +1,115 @@
+﻿@using IdentityModel.Client;
+@using Newtonsoft.Json;
+@using System.IdentityModel.Tokens.Jwt;
+@using System.Net.Http.Headers;
+@using System.Text.Json;
+@using System.Text.Json.Serialization;
+
+
+
+@page "/"
+@* @attribute [StreamRendering] *@
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+@if (jwtToken == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h1>jwtToken=@jwtToken</h1>
+    <h1>currentUser=@currentUser</h1>
+    <h1>currentUserEmail=@currentUserEmail</h1>
+    <h1>toDoItemsCount=@toDoItemsCount</h1>
+}
+
+Welcome to your new app.
+
+@code {
+    //private WeatherForecast[]? forecasts;
+    private string? jwtToken;
+    private string currentUser=String.Empty;
+    private string currentUserEmail = String.Empty;
+    private int toDoItemsCount;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(500);
+
+        using (var client = new HttpClient())
+        {
+            var identityServerResponse = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
+            {
+                Address = Configuration.WebApiUrl + "/connect/token", //"https://localhost:7123/connect/token",
+                ClientId = "todolist_client",
+                UserName = "admin", //
+                Password = "Password-123"  //.ToSha256()
+            });
+
+            jwtToken = identityServerResponse.AccessToken;
+
+            //Получение прав авторизованного пользователя на клиенте на основе анализа полученного jwtToken
+            JwtSecurityToken token = new JwtSecurityToken(jwtToken);
+            var claims = token.Claims;
+            currentUser = (claims != null) ? claims.FirstOrDefault(c => c.Type == "name")?.Value : String.Empty;
+            currentUserEmail = (claims != null) ? claims.FirstOrDefault(c => c.Type == "email")?.Value : String.Empty;
+        }
+
+        using (var client = new HttpClient())
+        {
+            client.BaseAddress = new Uri(Configuration.WebApiUrl + "/"); // new Uri("https://localhost:7123/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", textBox1.Text);
+            // client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtToken);
+            client.SetBearerToken(jwtToken);
+
+            // New code:
+            //HttpResponseMessage response = await client.GetAsync("api/Account/users");
+            var response = await client.GetAsync(Configuration.WebApiUrl + "/api/Account/users"); //https://localhost:7123/api/Account/users
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                //var options = new JsonSerializerOptions
+                //{
+                //    PropertyNameCaseInsensitive = true,
+                //};
+                //options.Converters.Add(new JsonStringEnumConverter());
+                //var users = System.Text.Json.JsonSerializer.Deserialize<List<UserViewModel>>(json, options);
+                //var users = JsonConvert.DeserializeObject<List<UserViewModel>>(json);
+
+            }
+
+            //
+            var response2 = await client.GetAsync(Configuration.WebApiUrl + "/api/Account/users/me"); //"https://localhost:7123/api/Account/users/me"
+
+            if (response2.IsSuccessStatusCode)
+            {
+                var json = await response2.Content.ReadAsStringAsync();
+               // var userMe = JsonConvert.DeserializeObject<UserViewModel>(json);
+
+            }
+
+            //
+            var response3 = await client.GetAsync(Configuration.WebApiUrl + "/api/ToDoList/ToDoItems"); //"https://localhost:7123/api/ToDoList/ToDoItems"
+
+            if (response3.IsSuccessStatusCode)
+            {
+                var json = await response3.Content.ReadAsStringAsync();
+                //var toDoItems = JsonConvert.DeserializeObject<List<ToDoItemResponse>>(json);
+                var toDoItems = JsonConvert.DeserializeObject<List<Object>>(json);
+
+                if (toDoItems != null)
+                {
+                    toDoItemsCount = toDoItems.Count;
+                }
+            }
+        }
+    }
+
+    
+}

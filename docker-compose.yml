@@ -1,0 +1,78 @@
+version: '3.4'
+services:
+  todolistapi:
+    image: ${DOCKER_REGISTRY-}todolistapi
+    build:
+      context: .
+      dockerfile: ToDoListApi/Dockerfile
+    ports:
+         - '1234:443'
+    volumes:
+      - ./ToDoListApi:/root/ToDoListApi:cached
+      - ./ToDoListApi/Certificates:/https/
+      - type: bind
+        source: ./ToDoListApi/Certificates/todolistroot.cer
+        target: /https-root/todolistroot.cer
+    environment:
+      - ASPNETCORE_URLS="https://+;"
+      - ASPNETCORE_HTTPS_PORT=443
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=1234
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/todolistapi.pfx
+    # entrypoint:
+    #  - ./TestLabApi/docker-entrypoint.sh
+
+  todolistblazor:
+    image: ${DOCKER_REGISTRY-}todolistblazor
+    build:
+      context: .
+      dockerfile: ToDoListBlazor/Dockerfile
+    ports:
+      - '1112:7060'
+    volumes:
+      - ./ToDoListBlazor:/root/ToDoListBlazor:cached
+      - ./ToDoListBlazor/Certificates:/https/
+      - type: bind
+        source: ./ToDoListBlazor/Certificates/todolistroot.cer
+        target: /https-root/todolistroot.cer
+    depends_on:
+      - todolistapi
+    environment:
+      - ASPNETCORE_URLS="https://+;"
+      - ASPNETCORE_HTTPS_PORT=7060
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=1234
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/todolistblazor.pfx
+    # entrypoint:
+    #  - ./ToDoListBlazor/docker-entrypoint.sh
+
+  todolistproxy:
+    image: ${DOCKER_REGISTRY-}todolistproxy
+    container_name: todolistproxy
+    build: todolistproxy
+    # build:
+    #   context: .
+    #   dockerfile: ToDoListProxy/Dockerfile
+    ports:
+      - 8443:443
+
+
+
+
+
+
+
+
+# version: '3.4'
+
+# services:
+#   todolistapi:
+#     image: ${DOCKER_REGISTRY-}todolistapi
+#     build:
+#       context: .
+#       dockerfile: ToDoListApi/Dockerfile
+
+#   todolistblazor:
+#     image: ${DOCKER_REGISTRY-}todolistblazor
+#     build:
+#       context: .
+#       dockerfile: ToDoListBlazor/Dockerfile
+

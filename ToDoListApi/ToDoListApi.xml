@@ -1,0 +1,338 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ToDoListApi</name>
+    </assembly>
+    <members>
+        <member name="F:ToDoListApi.Authorization.Policies.ViewAllUsersPolicy">
+            <summary>Policy to allow viewing all user records.</summary>
+        </member>
+        <member name="F:ToDoListApi.Authorization.Policies.ManageAllUsersPolicy">
+            <summary>Policy to allow adding, removing and updating all user records.</summary>
+        </member>
+        <member name="F:ToDoListApi.Authorization.Policies.ViewAllRolesPolicy">
+            <summary>Policy to allow viewing details of all roles.</summary>
+        </member>
+        <member name="F:ToDoListApi.Authorization.Policies.ViewRoleByRoleNamePolicy">
+            <summary>Policy to allow viewing details of all or specific roles (Requires roleName as parameter).</summary>
+        </member>
+        <member name="F:ToDoListApi.Authorization.Policies.ManageAllRolesPolicy">
+            <summary>Policy to allow adding, removing and updating all roles.</summary>
+        </member>
+        <member name="F:ToDoListApi.Authorization.Policies.AssignAllowedRolesPolicy">
+            <summary>Policy to allow assigning roles the user has access to (Requires new and current roles as parameter).</summary>
+        </member>
+        <member name="F:ToDoListApi.Authorization.Policies.ViewOrgDataPolicy">
+            <summary>Policy to allow viewing all organization data.</summary>
+        </member>
+        <member name="F:ToDoListApi.Authorization.Policies.ManageOrgDataPolicy">
+            <summary>Policy to allow adding, removing and updating all organization data.</summary>
+        </member>
+        <member name="T:ToDoListApi.Authorization.AccountManagementOperations">
+            <summary>
+            Operation Policy to allow adding, viewing, updating and deleting general or specific user records.
+            </summary>
+        </member>
+        <member name="T:ToDoListApi.Authorization.OrgDataManagementOperations">
+            <summary>
+            Operation Policy to allow adding, viewing, updating and deleting general or specific organization data records.
+            </summary>
+        </member>
+        <member name="M:ToDoListApi.Controllers.AccountController.GetCurrentUser">
+            <summary>
+            Get current user info
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.AccountController.GetUserById(System.String)">
+            <summary>
+            Get user by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.AccountController.GetUserByUserName(System.String)">
+            <summary>
+            Get user by name
+            </summary>
+            <param name="userName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.AccountController.GetUsers">
+            <summary>
+            Get users list
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.AccountController.GetUsers(System.Int32,System.Int32)">
+            <summary>
+            Get users list. Paging is used
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.AccountController.UpdateCurrentUser(ToDoListApi.ViewModels.UserEditViewModel)">
+            <summary>
+            Update current user's properties
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.AccountController.UpdateUser(System.String,ToDoListApi.ViewModels.UserEditViewModel)">
+            <summary>
+            Update user's properties
+            </summary>
+            <param name="id"></param>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.AccountController.UpdateCurrentUser(Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{ToDoListApi.ViewModels.UserPatchViewModel})">
+            <summary>
+            Update current user's properties by patching
+            </summary>
+            <param name="patch"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.AccountController.UpdateUser(System.String,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{ToDoListApi.ViewModels.UserPatchViewModel})">
+            <summary>
+            Update user's properties by patching
+            </summary>
+            <param name="id"></param>
+            <param name="patch"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.AccountController.Register(ToDoListApi.ViewModels.UserEditViewModel)">
+            <summary>
+            Register user
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.AccountController.DeleteUser(System.String)">
+            <summary>
+            Delete user
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:ToDoListApi.Controllers.AccountController.UnblockUser(System.String)">
+            <summary>
+            Unblock user
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:ToDoListApi.Controllers.AccountController.UserPreferences">
+            <summary>
+            Get user's properties by id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.AccountController.UserPreferences(System.String)">
+            <summary>
+            Update current user's preferences
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:ToDoListApi.Controllers.AccountController.GetRoleById(System.String)">
+            <summary>
+            Get role by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.AccountController.GetRoleByName(System.String)">
+            <summary>
+            Get role by name
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.AccountController.GetRoles">
+            <summary>
+            Get roles list
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.AccountController.GetRoles(System.Int32,System.Int32)">
+            <summary>
+            Get roles list using paging
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.AccountController.UpdateRole(System.String,ToDoListApi.ViewModels.RoleViewModel)">
+            <summary>
+            Update role
+            </summary>
+            <param name="id"></param>
+            <param name="role"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.AccountController.CreateRole(ToDoListApi.ViewModels.RoleViewModel)">
+            <summary>
+            Create role
+            </summary>
+            <param name="role"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.AccountController.DeleteRole(System.String)">
+            <summary>
+            Delete role
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:ToDoListApi.Controllers.AccountController.GetAllPermissions">
+            <summary>
+            Get all oermissions
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.HelperController.Test">
+            <summary>
+            Endpoint for testing. Returns "Test"
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.HelperController.GetWeatherForecast">
+            <summary>
+            Simple API test
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.HelperController.GetAuthServerUrl">
+            <summary>
+            Get authorisation server (Identity Server) url. 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.ToDoListController.Test">
+            <summary>
+            Endpoint for testing Returns "Test"
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.ToDoListController.AddPriority(ToDoListCore.Models.PriorityRequest,System.Boolean)">
+            <summary>
+            Add priority
+            </summary>
+            <param name="model"></param>
+            <param name="isCommitTransaction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.ToDoListController.GetPriorities(System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Get list of priorities
+            </summary>
+            <param name="minDate"></param>
+            <param name="maxDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.ToDoListController.GetPriority(System.Int32)">
+            <summary>
+            Get priority by Id
+            </summary>
+            <param name="methodSpecId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.ToDoListController.UpdatePriority(System.Int32,ToDoListCore.Models.PriorityRequest,System.Boolean)">
+            <summary>
+            Update priority object
+            </summary>
+            <param name="priorityId"></param>
+            <param name="model"></param>
+            <param name="isCommitTransaction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.ToDoListController.DeletePriority(System.Int32)">
+            <summary>
+            Delete priority object
+            </summary>
+            <param name="priorityId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.ToDoListController.AddToDoItem(ToDoListCore.Models.ToDoItemRequest,System.Boolean)">
+            <summary>
+            Add ToDoListItem
+            </summary>
+            <param name="model"></param>
+            <param name="isCommitTransaction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.ToDoListController.GetToDoItems(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Boolean},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Get list of ToDoListItem
+            </summary>
+            <param name="minDate"></param>
+            <param name="maxDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.ToDoListController.GetToDoItem(System.Int32)">
+            <summary>
+            Get ToDoListItem by Id
+            </summary>
+            <param name="toDoItemId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.ToDoListController.UpdateToDoItem(System.Int32,ToDoListCore.Models.ToDoItemRequest,System.Boolean)">
+            <summary>
+            Update ToDoListItem
+            </summary>
+            <param name="toDoItemId"></param>
+            <param name="model"></param>
+            <param name="isCommitTransaction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.ToDoListController.DeleteToDoItem(System.Int32)">
+            <summary>
+            Delete ToDoListItem
+            </summary>
+            <param name="toDoItemId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ToDoListApi.Migrations.InitConfigration">
+            <inheritdoc />
+        </member>
+        <member name="M:ToDoListApi.Migrations.InitConfigration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ToDoListApi.Migrations.InitConfigration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ToDoListApi.Migrations.InitConfigration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:ToDoListApi.Migrations.ConfigurationDb.InitConfigration">
+            <inheritdoc />
+        </member>
+        <member name="M:ToDoListApi.Migrations.ConfigurationDb.InitConfigration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ToDoListApi.Migrations.ConfigurationDb.InitConfigration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ToDoListApi.Migrations.ConfigurationDb.InitConfigration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:ToDoListApi.Migrations.PersistedGrantDb.InitConfigration">
+            <inheritdoc />
+        </member>
+        <member name="M:ToDoListApi.Migrations.PersistedGrantDb.InitConfigration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ToDoListApi.Migrations.PersistedGrantDb.InitConfigration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ToDoListApi.Migrations.PersistedGrantDb.InitConfigration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
