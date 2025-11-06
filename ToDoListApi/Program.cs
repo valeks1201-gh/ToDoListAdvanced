@@ -105,6 +105,8 @@ app.Run();
 
 static void AddServices(WebApplicationBuilder builder)
 {
+    builder.Services.AddGrpc(); //GRPC
+
     string connectionString;
     var authServerUrl = CoreUtilities.GetCurrentProjectUrl(Configuration.AppSettings).TrimEnd('/');
    // authServerUrl = @"https://localhost:7124";
@@ -482,6 +484,10 @@ static void ConfigureRequestPipeline(WebApplication app)
 
 
     app.MapDefaultControllerRoute();
+
+    // Map gRPC services.
+    app.MapGrpcService<GreeterImpl>();
+   // app.MapGrpcService<GreeterService>();
 
     //app.MapGet("/account", (HttpContext context) =>
     //       new JsonResult(context?.User?.Claims.Select(c => new { c.Type, c.Value }))

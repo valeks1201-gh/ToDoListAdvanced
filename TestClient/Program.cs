@@ -1,3 +1,15 @@
+using System.Net.NetworkInformation;
+
+using Grpc.Net.Client;
+using Greet;
+using System;
+
+
+using Grpc.Net.Client;
+using Greet;
+using System;
+using System.Threading.Tasks;
+
 namespace TestClient
 {
     internal static class Program
@@ -8,10 +20,19 @@ namespace TestClient
         [STAThread]
         static void Main()
         {
+
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new Form1());
+
+           
         }
+
+       
+
+
     }
+
+  
 }

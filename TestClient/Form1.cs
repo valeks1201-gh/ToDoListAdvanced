@@ -1,4 +1,5 @@
 using DAL.Models;
+using Grpc.Net.Client;
 using IdentityModel.Client;
 //using ToDoListApi.Models;
 //using DAL.Models.NotMapped.API;
@@ -9,6 +10,10 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using ToDoListApi.ViewModels;
 using ToDoListCore.Models;
+
+
+using Greet;
+using ToDoListCore;
 
 namespace TestClient
 {
@@ -28,7 +33,7 @@ namespace TestClient
                 {
                     Address = "https://localhost:7123/connect/token",
                     ClientId = "todolist_client",
-                   // ClientId = "todolist_client",
+                    // ClientId = "todolist_client",
                     //  ClientId = "markSoft_blazorClient",
 
                     //UserName = "Admin",
@@ -61,7 +66,7 @@ namespace TestClient
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", textBox1.Text);
-               // client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtToken);
+                // client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtToken);
                 client.SetBearerToken(jwtToken);
 
                 // New code:
@@ -92,7 +97,7 @@ namespace TestClient
                 }
 
                 // 
-                var response3 = await client.GetAsync("https://localhost:7123/api/ToDoList/ToDoItems"); 
+                var response3 = await client.GetAsync("https://localhost:7123/api/ToDoList/ToDoItems");
 
                 if (response3.IsSuccessStatusCode)
                 {
@@ -100,6 +105,16 @@ namespace TestClient
                     var toDoItems = JsonConvert.DeserializeObject<List<ToDoItemResponse>>(json);
                 }
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ////GRPC client
+            var testClass = new TestClass();
+            //var result = testClass.GetDataAsync();
+
+            var result = Task.Run(() => testClass.GetDataAsync()).Result;
+            label1.Text = result;
         }
     }
 }
