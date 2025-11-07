@@ -1,4 +1,5 @@
 using DAL.Models;
+using Greet;
 using Grpc.Net.Client;
 using IdentityModel.Client;
 //using ToDoListApi.Models;
@@ -9,11 +10,9 @@ using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using ToDoListApi.ViewModels;
-using ToDoListCore.Models;
-
-
-using Greet;
 using ToDoListCore;
+using ToDoListCore.Models;
+using static Azure.Core.HttpHeader;
 
 namespace TestClient
 {
@@ -110,11 +109,22 @@ namespace TestClient
         private void button2_Click(object sender, EventArgs e)
         {
             ////GRPC client
-            var testClass = new TestClass();
-            //var result = testClass.GetDataAsync();
-
-            var result = Task.Run(() => testClass.GetDataAsync()).Result;
+            var grcpClientHelper = new GrcpClientHelper();
+            var result0 = Task.Run(() => grcpClientHelper.GetJwtToken()).Result;
+            grcpClientHelper.JwtToken = result0; 
+            
+            var result = Task.Run(() => grcpClientHelper.GetDataAsync()).Result;
             label1.Text = result;
+
+            var result2 = Task.Run(() => grcpClientHelper.TestAsync()).Result;
+            label1.Text = label1.Text + ". Test:" + result2;
+
+            var result3 = Task.Run(() => grcpClientHelper.TestAuthAsync()).Result;
+            label1.Text = label1.Text + ". Auth Test:" + result3;
+
+            var result4 = Task.Run(() => grcpClientHelper.GetToDoItemsAsync()).Result;
+            var todoitems = string.Join(Environment.NewLine, result4.TodoItemsList);
+            label2.Text = todoitems;
         }
     }
 }

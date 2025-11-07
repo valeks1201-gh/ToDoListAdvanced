@@ -487,7 +487,7 @@ static void ConfigureRequestPipeline(WebApplication app)
 
     // Map gRPC services.
     app.MapGrpcService<GreeterImpl>();
-   // app.MapGrpcService<GreeterService>();
+    app.MapGrpcService<ToDoListGRPCImpl>();
 
     //app.MapGet("/account", (HttpContext context) =>
     //       new JsonResult(context?.User?.Claims.Select(c => new { c.Type, c.Value }))

@@ -170,6 +170,13 @@ sudo cp ./ToDoListBlazor/Certificates/todolistblazor.pem /usr/local/share/ca-cer
 sudo update-ca-certificates
 
 
+///////////////////////////////////////
+REST and gRPC services
+
+1. Both REST and gRPC services can be secured using IdentityServer8.
+2. The same c# code (for example from from ToDoListService.cs) can be used in both REST and gRPC services.
+3. gRPC services can be called from both WinForm and Blazor clients.
+
 
 
 

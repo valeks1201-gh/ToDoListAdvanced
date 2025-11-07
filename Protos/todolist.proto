@@ -1,0 +1,33 @@
+﻿syntax="proto3";
+package todolist;
+
+message Dummy{
+}
+
+message TestResponse{
+	string title=1;
+}
+
+message ToDoItemResponse{
+	int32 id=1;
+	string title=2;
+	string description=3;
+	bool iscompleted=4;
+}
+
+message ToDoItemsResponse{
+	repeated ToDoItemResponse  todoItemsList=1;
+}
+
+service ToDoListGRPC{
+	rpc Test (Dummy) returns (TestResponse);
+	rpc TestAuth (Dummy) returns (TestResponse);
+	rpc GetToDoList (Dummy) returns (ToDoItemsResponse);
+}
+
+
+
+
+
+
+

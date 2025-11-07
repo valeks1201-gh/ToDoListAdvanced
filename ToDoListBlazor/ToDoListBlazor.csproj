@@ -28,6 +28,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ToDoListCore\ToDoListCore.csproj" />
     <Protobuf Include="..\Protos\greet.proto" GrpcServices="Client" Link="Protos\greet.proto" />
+    <Protobuf Include="..\Protos\todolist.proto" GrpcServices="Client" Link="Protos\todolist.proto" />
   </ItemGroup>
 
   <ItemGroup>

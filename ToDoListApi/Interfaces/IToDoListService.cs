@@ -6,6 +6,7 @@ namespace ToDoListApi.Interfaces
 {
     public interface IToDoListService
     {
+        Task<string> Test();
         Task<Priority> AddPriority(PriorityRequest model, Account account, bool isCommitTransaction = true);
         Task<List<Priority>?> GetPriorities(Account account, DateTime? minDate = null, DateTime? maxDate = null);
         Task<Priority?> GetPriority(int priorityId, Account account);

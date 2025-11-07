@@ -216,6 +216,12 @@
         </member>
         <member name="M:ToDoListApi.Controllers.ToDoListController.Test">
             <summary>
+            Endpoint for testing. Returns "Test" + DateTime
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoListApi.Controllers.ToDoListController.TestSimple">
+            <summary>
             Endpoint for testing Returns "Test"
             </summary>
             <returns></returns>
@@ -380,6 +386,46 @@
             <param name="serviceImpl">An object implementing the server-side handling logic.</param>
         </member>
         <member name="M:Greet.Greeter.BindService(Grpc.Core.ServiceBinderBase,Greet.Greeter.GreeterBase)">
+            <summary>Register service method with a service binder with or without implementation. Useful when customizing the service binding logic.
+            Note: this method is part of an experimental API that can change or be removed without any prior notice.</summary>
+            <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
+            <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+        </member>
+        <member name="T:Todolist.TodolistReflection">
+            <summary>Holder for reflection information generated from todolist.proto</summary>
+        </member>
+        <member name="P:Todolist.TodolistReflection.Descriptor">
+            <summary>File descriptor for todolist.proto</summary>
+        </member>
+        <member name="F:Todolist.TestResponse.TitleFieldNumber">
+            <summary>Field number for the "title" field.</summary>
+        </member>
+        <member name="F:Todolist.ToDoItemResponse.IdFieldNumber">
+            <summary>Field number for the "id" field.</summary>
+        </member>
+        <member name="F:Todolist.ToDoItemResponse.TitleFieldNumber">
+            <summary>Field number for the "title" field.</summary>
+        </member>
+        <member name="F:Todolist.ToDoItemResponse.DescriptionFieldNumber">
+            <summary>Field number for the "description" field.</summary>
+        </member>
+        <member name="F:Todolist.ToDoItemResponse.IscompletedFieldNumber">
+            <summary>Field number for the "iscompleted" field.</summary>
+        </member>
+        <member name="F:Todolist.ToDoItemsResponse.TodoItemsListFieldNumber">
+            <summary>Field number for the "todoItemsList" field.</summary>
+        </member>
+        <member name="P:Todolist.ToDoListGRPC.Descriptor">
+            <summary>Service descriptor</summary>
+        </member>
+        <member name="T:Todolist.ToDoListGRPC.ToDoListGRPCBase">
+            <summary>Base class for server-side implementations of ToDoListGRPC</summary>
+        </member>
+        <member name="M:Todolist.ToDoListGRPC.BindService(Todolist.ToDoListGRPC.ToDoListGRPCBase)">
+            <summary>Creates service definition that can be registered with a server</summary>
+            <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+        </member>
+        <member name="M:Todolist.ToDoListGRPC.BindService(Grpc.Core.ServiceBinderBase,Todolist.ToDoListGRPC.ToDoListGRPCBase)">
             <summary>Register service method with a service binder with or without implementation. Useful when customizing the service binding logic.
             Note: this method is part of an experimental API that can change or be removed without any prior notice.</summary>
             <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>

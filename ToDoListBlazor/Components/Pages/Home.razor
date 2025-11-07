@@ -32,6 +32,11 @@ else
     <h1>currentUserEmail=@currentUserEmail</h1>
     <h1>toDoItemsCount=@toDoItemsCount</h1>
     <h1>grpcHelloServiceResponse=@grpcHelloServiceResponse</h1>
+    <h1>toDoListGRPCImplTestResponse=@toDoListGRPCImplTestResponse</h1>
+    <h1>toDoListGRPCImplTestAuthResponse=@toDoListGRPCImplTestAuthResponse</h1>
+    <h1>toDoListGRPCImplGetToDoListResponse=@((MarkupString)toDoListGRPCImplGetToDoListResponse)</h1>
+
+
 }
 
 Welcome to your new app.
@@ -43,6 +48,9 @@ Welcome to your new app.
     private string currentUserEmail = String.Empty;
     private int toDoItemsCount;
     private string grpcHelloServiceResponse;
+    private string toDoListGRPCImplTestResponse;
+    private string toDoListGRPCImplTestAuthResponse;
+    private string toDoListGRPCImplGetToDoListResponse;
 
     protected override async Task OnInitializedAsync()
     {
@@ -129,8 +137,18 @@ Welcome to your new app.
 
 
             ////GRPC client
-            var testClass = new TestClass();
-            grpcHelloServiceResponse = Task.Run(() => testClass.GetDataAsync()).Result;
+            var grcpClientHelper = new GrcpClientHelper();
+
+            var result0 = Task.Run(() => grcpClientHelper.GetJwtToken()).Result;
+            grcpClientHelper.JwtToken = result0;
+
+            grpcHelloServiceResponse = Task.Run(() => grcpClientHelper.GetDataAsync()).Result;
+            toDoListGRPCImplTestResponse = Task.Run(() => grcpClientHelper.TestAsync()).Result;
+            toDoListGRPCImplTestAuthResponse = Task.Run(() => grcpClientHelper.TestAuthAsync()).Result;
+
+            var todoitemsList = Task.Run(() => grcpClientHelper.GetToDoItemsAsync()).Result;
+            toDoListGRPCImplGetToDoListResponse = "<br/>" + string.Join("<br/>", todoitemsList.TodoItemsList);
+
         }
     }
 

@@ -45,6 +45,11 @@ namespace ToDoListApi.Services
             _environment = environment;
         }
 
+        public async Task<string> Test()
+        {
+            return "Test " + DateTime.UtcNow.ToString();
+        }
+
         public async Task<Priority> AddPriority(PriorityRequest model, Account account, bool isCommitTransaction = true)
         {
             if (account.Organization != null)

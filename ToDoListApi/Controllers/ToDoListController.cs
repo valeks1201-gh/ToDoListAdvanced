@@ -36,12 +36,25 @@ namespace ToDoListApi.Controllers
         }
 
         /// <summary>
+        /// Endpoint for testing. Returns "Test" + DateTime
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet("Test")]
+        [ProducesResponseType(200, Type = typeof(string))]
+        public async Task<IActionResult> Test()
+        {
+            var response = await _toDoListService.Test();
+            return Ok(response);
+        }
+
+        /// <summary>
         /// Endpoint for testing Returns "Test"
         /// </summary>
         /// <returns></returns>
         [HttpGet("uncertainty/test")]
         [ProducesResponseType(200, Type = typeof(string))]
-        public string Test()
+        public string TestSimple()
         {
             return "Test";
         }

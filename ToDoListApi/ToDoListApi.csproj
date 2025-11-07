@@ -50,6 +50,7 @@
     <ProjectReference Include="..\DAL\DAL.csproj" />
     <ProjectReference Include="..\ToDoListCore\ToDoListCore.csproj" />
 	<Protobuf Include="..\Protos\greet.proto" GrpcServices="Server" Link="Protos\greet.proto" />
+    <Protobuf Include="..\Protos\todolist.proto" GrpcServices="Server" Link="Protos\todolist.proto" />
   </ItemGroup>
 
   <ItemGroup>

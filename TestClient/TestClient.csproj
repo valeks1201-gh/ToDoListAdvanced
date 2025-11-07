@@ -16,6 +16,7 @@
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
 	  <Protobuf Include="..\Protos\greet.proto" GrpcServices="Client" Link="Protos\greet.proto" />
+	  <Protobuf Include="..\Protos\todolist.proto" GrpcServices="Client" Link="Protos\todolist.proto" />
     <ProjectReference Include="..\DAL\DAL.csproj" />
     <ProjectReference Include="..\ToDoListApi\ToDoListApi.csproj" />
   </ItemGroup>
